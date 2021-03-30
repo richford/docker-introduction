@@ -11,7 +11,7 @@ objectives:
 - "Describe at least two ways to run commands inside a running Docker container."
 keypoints:
 - "The `docker pull` command downloads Docker images from the internet."
-- "The `docker image` command lists Docker images that are (now) on your computer."
+- "The `docker image ls` command lists Docker images that are (now) on your computer."
 - "The `docker run` command creates running containers from images and can run commands inside them."
 - "When using the `docker run` command, a container can run a default action (if it
 has one), a user specified action, or a shell to be used interactively."
