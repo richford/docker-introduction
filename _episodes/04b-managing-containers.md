@@ -7,7 +7,7 @@ questions:
 objectives:
 - "Explain how to list running and completed containers."
 keypoints:
-- "The `docker container` command lists containers that have been created."
+- "The `docker container ls` command lists containers that have been created."
 ---
 
 ## Removing images
