@@ -208,7 +208,7 @@ Creating dockerintroduction_my-jekyll-server_1 ...
 Creating dockerintroduction_my-jekyll-server_1 ... done
 Attaching to dockerintroduction_my-jekyll-server_1
 my-jekyll-server_1  | ruby 2.7.1p83 (2020-03-31 revision a0c7c23c9c) [x86_64-linux-musl]
-my-jekyll-server_1  | Configuration file: none
+my-jekyll-server_1  | Configuration file: /src/jekyll/_config.yml
 my-jekyll-server_1  |             Source: /srv/jekyll
 my-jekyll-server_1  |        Destination: /srv/jekyll/_site
 my-jekyll-server_1  |  Incremental build: disabled. Enable with --incremental
