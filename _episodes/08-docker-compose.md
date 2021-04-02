@@ -18,7 +18,7 @@ keypoints:
 The `docker-compose` tool is one of a number of tools for organizing containers, and it is evolving rapidly. In this lesson, we will focus on uses of `docker-compose` that arise commonly when developing reproducible computations. This is just one set of ways that `docker-compose` can be used, however. In industry, for example, `docker-compose` is often used to manage the elastic coordination of cloud computing nodes that host web-services.
 
 ### `docker-compose` can simplify the use of Docker containers
-By this point, we've seen that the `docker` command is a powerful tool for interacting with containers and container images. It can be used to build containers, pull containeres from DockerHub, and to run containers. We have also seen how a `Dockerfile` can encode a specific set of instructions that the `docker build` command can use to create a particular software environment in a container image. A frequent tactic for software projects is to include a `Dockerfile` in the project's GitHub repository root. This file generally creates a container image that is capable of supporting the software in the repository so that developers and users who download the software from GitHub can easily run it.
+By this point, we've seen that the `docker` command is a powerful tool for interacting with containers and container images. It can be used to build containers, pull containers from DockerHub, and to run containers. We have also seen how a `Dockerfile` can encode a specific set of instructions that the `docker build` command can use to create a particular software environment in a container image. A frequent tactic for software projects is to include a `Dockerfile` in the project's GitHub repository root. This file generally creates a container image that is capable of supporting the software in the repository so that developers and users who download the software from GitHub can easily run it.
 
 > ## docker-compose is an official part of docker...
 > There are many tools for orchestrating and managing containers, but a
@@ -28,11 +28,11 @@ By this point, we've seen that the `docker` command is a powerful tool for inter
 > container.
 {: .callout}
 
-For example, suppose I am working on a team that is developing a Linux-based data analyss tool, but I only have a Windows machine. In order for me to test the code I've written, I will need to be able to run it on a Linux machine. A simple fix would be for us to include a Dockerfile that encodes all the software dependencies of the project on top of a Linux image such as the `alpine` Docker image we have used in previous lessons. Then, whenever I needed to test my code, I can use `docker run` to start the container and test my code.
+For example, suppose I am working on a team that is developing a Linux-based data analysis tool, but I only have a Windows machine. In order for me to test the code I've written, I will need to be able to run it on a Linux machine. A simple fix would be for us to include a Dockerfile that encodes all the software dependencies of the project on top of a Linux image such as the `alpine` Docker image we have used in previous lessons. Then, whenever I needed to test my code, I can use `docker run` to start the container and test my code.
 
 Although this approach is very valuable, a frequent difficulty is that, in order to use software in this manner, one must be familiar enough with Docker to correctly run both the `docker build` and the `docker run` commands. These commands can be intimidating for inexperienced users, and for complex containers, they can themselves be very long.
 
-One way to simplify the process of building and running a container for an end-user is to user a `docker-compose.yml` file. Such a file can be used to document the way that a container is intended to be built and run. In this lesson, we will demonstrate how to do this with the `alpine-sum` Docker image we created in an earlier lesson.
+One way to simplify the process of building and running a container for an end-user is to write a `docker-compose.yml` file. Such a file can be used to document the way that a container is intended to be built and run. In this lesson, we will demonstrate how to do this with the `alpine-sum` Docker image we created in an earlier lesson.
 
 
 ### Creating our first `docker-compose.yml` file
@@ -62,7 +62,7 @@ $ docker run alpine-sum:v3 1 2 3 4
 ~~~
 {: .language-bash}
 
-The `docker-compose` commannd uses a file called, predictably enough, `docker-compose.yml`. The `yml` at the end is sometimes `yaml` instead--both of these are endings for YAML files, which are text-based data files that use an intuitive format. Go ahead and use your favorite text editor to create a file `docker-compose.yml` with the followig text:
+The `docker-compose` command uses a file called, predictably enough, `docker-compose.yml`. The `yml` at the end is sometimes `yaml` instead--both of these are endings for YAML files, which are text-based data files that use an intuitive format. Go ahead and use your favorite text editor to create a file `docker-compose.yml` with the following text:
 
 ~~~
 version: '3'
@@ -101,7 +101,7 @@ sum = 14
 {: .output}
 
 ### The `docker-compose.yml` file
-Let's break downn the `docker-compose.yml` file we just created to better understand it.
+Let's break down the `docker-compose.yml` file we just created to better understand it.
 
 ~~~
 version: 3.0
@@ -156,7 +156,7 @@ $ docker run --rm -it -v ${PWD}:/srv/jekyll -p 127.0.0.1:4000:4000 jekyll/jekyll
 ~~~
 {: .language-bash}
 
-Let's create a `docker-compose.yml` file to manage this particular server. Each of the options in the above command line has a related keyword that can be used in the `docker-composee.yml` file, but we'll start with a simple YAML file.
+Let's create a `docker-compose.yml` file to manage this particular server. Each of the options in the above command line has a related keyword that can be used in the `docker-compose.yml` file, but we'll start with a simple YAML file.
 ~~~
 version: '3'
 services:
@@ -165,7 +165,7 @@ services:
 ~~~
 {: .language-yaml}
 
-This file is much like our earlier `docker-compose.yml` file, with the exception that it uses an `image:` tag to declare that the Docker image for the `my-jekyll-server` service should be started from the `jekyll/jekyll:pages` image obtained from DockerHub. In fact, we can go ahead and use this `docker-compose.yml` file, but since it only storees the name of the image, it won't simplify the command-line very much.
+This file is much like our earlier `docker-compose.yml` file, with the exception that it uses an `image:` tag to declare that the Docker image for the `my-jekyll-server` service should be started from the `jekyll/jekyll:pages` image obtained from DockerHub. In fact, we can go ahead and use this `docker-compose.yml` file, but since it only stores the name of the image, it won't simplify the command-line very much.
 
 ~~~
 $ docker-compose run --rm -v ${PWD}:/srv/jekyll -p 127.0.0.1:4000:4000 my-jekyll-server jekyll serve
@@ -174,7 +174,7 @@ $ docker-compose run --rm -v ${PWD}:/srv/jekyll -p 127.0.0.1:4000:4000 my-jekyll
 
 (Don't forget that you can push control-C to exit out of the Jekyll-server container.) In the above line, we no longer need to specify the container name; however, we still have to specify everything else, including the name of the service (`my-jekyll-server`).
 
-What would really be useful in this situation is if we could store somee of the command-line eoptions, like the port specification (`-p 127.0.0.1:4000:4000`) or the volumes specification `-v ${PWD}:/srv/jekyll` in the YAML file. Fortunately, we can! Docker compose supports a number of options for its services, including the `volumes:`, the `ports:`, and the `command:` keywords. Let's edit the `docker-compose.yml` file to include these.
+What would really be useful in this situation is if we could store some of the command-line options, like the port specification (`-p 127.0.0.1:4000:4000`) or the volumes specification `-v ${PWD}:/srv/jekyll` in the YAML file. Fortunately, we can! Docker compose supports a number of options for its services, including the `volumes:`, the `ports:`, and the `command:` keywords. Let's edit the `docker-compose.yml` file to include these.
 
 ~~~
 version: '3'

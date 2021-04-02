@@ -89,7 +89,7 @@ Instead, what we see is our desktop, program windows, different folders, and
 files. These all 
 live in what's called the file system. Everything on your computer - programs, 
 pictures, documents - lives somewhere in the file system. One way to think of 
-the file system is the layer of stuff that can be activated to use use the CPU, memory and hard 
+the file system is the layer of stuff that can be activated to use the CPU, memory and hard 
 drive of your computer. 
 
 NOW, imagine you wanted to have a second computer. You don't want to buy a 
